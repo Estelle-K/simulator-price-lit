@@ -1,0 +1,37 @@
+{
+  "name": "simulator-price-lit",
+  "version": "1.0.0",
+  "description": "",
+  "browserslist": "> 0.5%, last 2 versions, not dead",
+  "scripts": {
+    "start": "parcel index.html",
+    "build": "parcel build index.html --public-url ./",
+    "format": "prettier --write \"src/**/*.{js,jsx}\"",
+    "lint": "eslint \"src/**/*.{js,jsx}\" --quiet"
+  },
+  "eslintConfig": {
+    "extends": [
+      "@open-wc/eslint-config"
+    ]
+  },
+  "prettier": {
+    "singleQuote": true,
+    "arrowParens": "avoid"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@open-wc/eslint-config": "^7.0.0",
+    "eslint": "^7.32.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-import": "^2.25.2",
+    "eslint-plugin-prettier": "^4.0.0",
+    "parcel": "^2.0.0",
+    "prettier": "^2.4.1"
+  },
+  "dependencies": {
+    "lit": "^2.0.2"
+  }
+}
