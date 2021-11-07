@@ -3,13 +3,15 @@ import { stylesComponents } from './styles-components.js';
 import imgAdd from './assets/outline_add_white_24dp.png';
 
 export class RuntimeElement extends LitElement {
-  static properties = {
+  /* static properties = {
     response: { type: Array },
-  };
+  }; */
 
   static get properties() {
     return {
+      response: { type: Array },
       listElements: { type: Array },
+      listElementParent: { type: Function }
     };
   }
 
@@ -19,20 +21,11 @@ export class RuntimeElement extends LitElement {
   }
 
   getListElements(name, logo, id, flavors) {
-    /* this.listElements.push({
-      name: name,
-      logo: logo,
-      id: id,
-      plan: flavors,
-    }); */
-    this.listElements = [
-      ...this.listElements,
-      { name: name, logo: logo, id: id, flavors: flavors },
-    ];
-    console.log('listElements', this.listElements);
+    this.listElements = [{ name: name, logo: logo, id: id, flavors: flavors }];
   }
 
   render() {
+
     return html`
         <div class="columnRuntime">
             <div class="headerList alignElement sticky">Runtime</div>
@@ -43,28 +36,30 @@ export class RuntimeElement extends LitElement {
                         item => html`
                           <div class="containElement">
                             <img
-                              alt="${item.variant.name}'s logo"
+                              alt="${item.name}'s logo"
                               class="sizeImage"
-                              src=${item.variant.logo}
+                              src=${item.logo}
                             />
                             <span class="spaceElementVariant">
-                              ${item.variant.name}
+                              ${item.name}
                             </span>
                             <span class="alignRight">
                               <button
                                 type="button"
-                                @click=${() =>
+                                @click=${(e) => {
                                   this.getListElements(
-                                    item.variant.name,
-                                    item.variant.logo,
-                                    item.variant.id,
-                                    item.variant.flavors
-                                  )}
+                                    item.name,
+                                    item.logo,
+                                    item.id,
+                                    item.flavors
+                                  );
+                                  this.listElementParent(this.listElements);
+                                }}
                               >
                                 <img
                                   class="imgAdd"
-                                  aria-label="${item.variant.name}'s plan"
-                                  alt="${item.variant.name}'s plan"
+                                  aria-label="${item.name}'s plan"
+                                  alt="${item.name}'s plan"
                                   src=${imgAdd}
                                 />
                               </button>

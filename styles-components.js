@@ -1,6 +1,21 @@
 import { css } from 'lit';
 
 export const stylesComponents = css`
+
+h1 {
+	font-size: var(--global-h1-size);
+}
+
+h3 {
+	font-size: var(--global-size);
+}
+
+.header {
+	grid-area: header;
+	text-align: center;
+	vertical-align: middle;
+}
+
   .columnRuntime,
   .columnPlan,
   .columnCart {
@@ -17,9 +32,6 @@ export const stylesComponents = css`
   }
   .columnCart {
     grid-area: columnCart;
-  }
-  h3 {
-    font-size: var(--global-size);
   }
 
   /* 
