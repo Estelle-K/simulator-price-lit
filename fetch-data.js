@@ -1,11 +1,14 @@
 import { LitElement, html, css } from 'lit';
 import './runtime-element.js';
 import './plan-element.js';
+import { stylesComponents } from './styles-components.js';
 export class FetchData extends LitElement {
   static get properties() {
     return {
       response: { type: Array },
       listParent: { type: Array },
+      listCart: { type: Array },
+      total: { type: Number },
     };
   }
 
@@ -13,6 +16,8 @@ export class FetchData extends LitElement {
     super();
     this.response = [];
     this.listParent = [];
+    this.listCart = [];
+    this.total = 0;
   }
 
   async firstUpdated() {
@@ -56,21 +61,47 @@ export class FetchData extends LitElement {
     this.listParent = list;
   }
 
+  listElementCart(cart) {
+    this.listCart = cart;
+  }
+
+  getTotal() {
+    let addprice = 0;
+    for (const price of this.listCart) {
+      addprice += price.flavorPrice;
+    }
+    this.total = addprice.toFixed(2);
+    console.log('total', this.total);
+  }
+
+  updated(total) {
+    this.getTotal();
+  }
+
   render() {
     const { response } = this;
-
+    console.log('listCart', this.listCart);
     return html`
       <div class="container">
+        <div class="header">
+          <header>
+            <h1>Cost <span>€${this.total}</span></h1>
+          </header>
+        </div>
         <runtime-element
           .response="${response}"
           .listElementParent="${this.listElementParent.bind(this)}"
         ></runtime-element>
-        <plan-element .flavors="${this.listParent}"></plan-element>
+        <plan-element
+          .flavors="${this.listParent}"
+          .listElementCart="${this.listElementCart.bind(this)}"
+        ></plan-element>
       </div>
     `;
   }
 
   static styles = [
+    stylesComponents,
     css`
       .container {
         display: grid;

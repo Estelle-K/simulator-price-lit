@@ -6,13 +6,33 @@ export class PlanElement extends LitElement {
   static get properties() {
     return {
       flavors: { type: Array },
+      listCart: { type: Array },
+      listElementCart: { type: Function },
     };
   }
 
   constructor() {
     super();
     this.flavors = [];
+    this.listCart = [];
   }
+
+  getListCart(variantName, variantLogo, variantId, flavorName, flavorPrice) {
+    this.listCart = [
+      ...this.listCart,
+      {
+        variantName: variantName,
+        variantLogo: variantLogo,
+        variantId: variantId + this.randomNumber(1, 100),
+        flavorName: flavorName,
+        flavorPrice: flavorPrice,
+      },
+    ];
+  }
+
+  randomNumber = (min, max) => {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  };
 
   render() {
     const { flavors } = this;
@@ -79,7 +99,19 @@ export class PlanElement extends LitElement {
                             <td>
                               <div class="containElement">
                                 <span class="alignRight">
-                                  <button type="button">
+                                  <button
+                                    type="button"
+                                    @click=${() => {
+                                      this.getListCart(
+                                        flavors.name,
+                                        flavors.logo,
+                                        flavors.id,
+                                        flavor.flavor_name,
+                                        flavor.price
+                                      );
+                                      this.listElementCart(this.listCart);
+                                    }}
+                                  >
                                     <img
                                       class="imgAdd"
                                       aria-label="${flavor.flavor_name}'s plan"
@@ -131,6 +163,10 @@ export class PlanElement extends LitElement {
 
       .overflowElement {
         overflow-x: auto;
+      }
+
+      .fontNormal {
+        font-weight: 300;
       }
     `,
   ];

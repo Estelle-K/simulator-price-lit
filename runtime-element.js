@@ -46,7 +46,7 @@ export class RuntimeElement extends LitElement {
                             <span class="alignRight">
                               <button
                                 type="button"
-                                @click=${(e) => {
+                                @click=${() => {
                                   this.getListElements(
                                     item.name,
                                     item.logo,
@@ -75,27 +75,7 @@ export class RuntimeElement extends LitElement {
   }
 
   static styles = [
-    stylesComponents,
-
-    css`
-      .spaceElementVariant {
-        padding-right: 3px;
-      }
-
-      .alignElement {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-
-      .alignLeft {
-        margin-left: 10px;
-      }
-
-      .fontNormal {
-        font-weight: 300;
-      }
-    `,
+    stylesComponents
   ];
 }
 

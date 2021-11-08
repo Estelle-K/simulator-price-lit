@@ -1,20 +1,19 @@
 import { css } from 'lit';
 
 export const stylesComponents = css`
+  h1 {
+    font-size: var(--global-h1-size);
+  }
 
-h1 {
-	font-size: var(--global-h1-size);
-}
+  h3 {
+    font-size: var(--global-size);
+  }
 
-h3 {
-	font-size: var(--global-size);
-}
-
-.header {
-	grid-area: header;
-	text-align: center;
-	vertical-align: middle;
-}
+  .header {
+    grid-area: header;
+    text-align: center;
+    vertical-align: middle;
+  }
 
   .columnRuntime,
   .columnPlan,
@@ -22,6 +21,7 @@ h3 {
     -webkit-box-shadow: 3px 15px 26px -3px rgba(79, 90, 125, 0.5);
     box-shadow: 3px 15px 26px -3px rgba(79, 90, 125, 0.5);
     overflow-y: auto;
+    height: 85vh;
   }
 
   .columnRuntime {
@@ -167,5 +167,19 @@ h3 {
   .sizeImage {
     width: var(--global-img-runtime-size);
     padding-right: 10px;
+  }
+
+  .spaceElementVariant {
+    padding-right: 3px;
+  }
+
+  .alignElement {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .alignLeft {
+    margin-left: 10px;
   }
 `;
