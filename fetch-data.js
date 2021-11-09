@@ -1,6 +1,7 @@
 import { LitElement, html, css } from 'lit';
 import './runtime-element.js';
 import './plan-element.js';
+import './shoppingcart-element.js';
 import { stylesComponents } from './styles-components.js';
 export class FetchData extends LitElement {
   static get properties() {
@@ -65,13 +66,16 @@ export class FetchData extends LitElement {
     this.listCart = cart;
   }
 
+  updateCart(totalCart) {
+    this.total = totalCart;
+  }
+
   getTotal() {
     let addprice = 0;
     for (const price of this.listCart) {
       addprice += price.flavorPrice;
     }
     this.total = addprice.toFixed(2);
-    console.log('total', this.total);
   }
 
   updated(total) {
@@ -80,7 +84,7 @@ export class FetchData extends LitElement {
 
   render() {
     const { response } = this;
-    console.log('listCart', this.listCart);
+
     return html`
       <div class="container">
         <div class="header">
@@ -96,6 +100,7 @@ export class FetchData extends LitElement {
           .flavors="${this.listParent}"
           .listElementCart="${this.listElementCart.bind(this)}"
         ></plan-element>
+        <shoppingcart-element .listCart="${this.listCart}" .updateCart="${this.updateCart.bind(this)}"></shoppingcart-element>
       </div>
     `;
   }
