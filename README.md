@@ -1,5 +1,5 @@
 
-# Price's Simulator with React
+# Price's Simulator with Lit
 
 This is a price's simulator created with Lit. Only grid and flexbox for the structure. Adaptive layouts without media queries.
 
