@@ -9,16 +9,13 @@ export class ShoppingCartElement extends LitElement {
       updateCart: { type: Function },
       totalCart: { type: Number },
       newListCart: { type: Array },
-      hasChanged(newListCart, listCart) {
-        return newListCart > listCart;
-      }
+      listElementCart: { type: Function },
     };
   }
 
   constructor() {
     super();
     this.totalCart = this.updateCart;
-    this.newListCart = [];
   }
 
   removeElementCart(variantId, flavorPrice) {
@@ -29,14 +26,14 @@ export class ShoppingCartElement extends LitElement {
       this.totalCart = 0;
       this.listCart = [];
     } else {
-      console.log("before", this.listCart)
       this.totalCart = this.totalCart - flavorPrice;
       this.listCart = this.newListCart;
-      console.log("after", this.listCart)
     }
   }
 
   render() {
+    //console.log("shoppingcart", this.listCart)
+
     return html`
       <div class="columnCart">
         <div class="headerList sticky alignElement">Shopping Cart</div>
@@ -73,6 +70,7 @@ export class ShoppingCartElement extends LitElement {
                           cart.flavorPrice
                         );
                         this.updateCart(this.totalCart);
+                        this.listElementCart(this.listCart);
                       }}
                     >
                       <img

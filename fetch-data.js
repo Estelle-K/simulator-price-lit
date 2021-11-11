@@ -78,12 +78,13 @@ export class FetchData extends LitElement {
     this.total = addprice.toFixed(2);
   }
 
-  updated(total) {
+  updated() {
     this.getTotal();
   }
 
   render() {
     const { response } = this;
+    //console.log('fetch-data', this.listCart);
 
     return html`
       <div class="container">
@@ -97,10 +98,16 @@ export class FetchData extends LitElement {
           .listElementParent="${this.listElementParent.bind(this)}"
         ></runtime-element>
         <plan-element
+        .listCart="${this.listCart}"
           .flavors="${this.listParent}"
           .listElementCart="${this.listElementCart.bind(this)}"
         ></plan-element>
-        <shoppingcart-element .listCart="${this.listCart}" .updateCart="${this.updateCart.bind(this)}"></shoppingcart-element>
+        <shoppingcart-element
+          .listCart="${this.listCart}"
+          .updateCart="${this.updateCart.bind(
+            this
+          )}" .listElementCart="${this.listElementCart.bind(this)}"
+        ></shoppingcart-element>
       </div>
     `;
   }

@@ -36,6 +36,7 @@ export class PlanElement extends LitElement {
 
   render() {
     const { flavors } = this;
+    //console.log('plan-element', this.listCart);
 
     return html`
       <div class="columnPlan">
