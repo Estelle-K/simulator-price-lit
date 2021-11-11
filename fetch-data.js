@@ -3,6 +3,14 @@ import './runtime-element.js';
 import './plan-element.js';
 import './shoppingcart-element.js';
 import { stylesComponents } from './styles-components.js';
+
+/**
+ * @typedef FetchData
+ * @property {array} response Array contains all data from api
+ * @property {array} listParent Array contains runtime selectionned
+ * @property {array} listCart Array where add elements selectionned
+ * @property {number} total sum total elements selectionned
+ */
 export class FetchData extends LitElement {
   static get properties() {
     return {
@@ -21,6 +29,10 @@ export class FetchData extends LitElement {
     this.total = 0;
   }
 
+  /**
+   * Fetch data through API
+   * @async
+   */
   async firstUpdated() {
     try {
       const result = await fetch(
@@ -35,6 +47,11 @@ export class FetchData extends LitElement {
     }
   }
 
+  /**
+   * Retourn array with all element needed to application
+   * @param {array} instances Data from API
+   * @returns {array} Array with all element organised
+   */
   getVariants(instances) {
     let variants = [];
     for (const instance of instances) {
@@ -58,18 +75,34 @@ export class FetchData extends LitElement {
     return variants;
   }
 
+  /**
+   * Function send to runtimeElement component
+   * @param {array} list array updated who contains runtime selectionned
+   */
   listElementParent(list) {
     this.listParent = list;
   }
 
+  /**
+   * Function send to planElement and shoppingCart component
+   * @param {array} list array updated who contains shopping cart selectionned
+   */
   listElementCart(cart) {
     this.listCart = cart;
   }
 
+  /**
+   * Function send to shoppingCart component
+   * @param {number} totalCart number updated who contains total amount
+   */
   updateCart(totalCart) {
     this.total = totalCart;
   }
 
+  /**
+   * Calcul total of listCart selectionned by user
+   * and adjust display number with two digits after decimal
+   */
   getTotal() {
     let addprice = 0;
     for (const price of this.listCart) {
@@ -98,15 +131,14 @@ export class FetchData extends LitElement {
           .listElementParent="${this.listElementParent.bind(this)}"
         ></runtime-element>
         <plan-element
-        .listCart="${this.listCart}"
+          .listCart="${this.listCart}"
           .flavors="${this.listParent}"
           .listElementCart="${this.listElementCart.bind(this)}"
         ></plan-element>
         <shoppingcart-element
           .listCart="${this.listCart}"
-          .updateCart="${this.updateCart.bind(
-            this
-          )}" .listElementCart="${this.listElementCart.bind(this)}"
+          .updateCart="${this.updateCart.bind(this)}"
+          .listElementCart="${this.listElementCart.bind(this)}"
         ></shoppingcart-element>
       </div>
     `;

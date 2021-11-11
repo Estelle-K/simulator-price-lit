@@ -2,6 +2,12 @@ import { LitElement, html, css } from 'lit';
 import { stylesComponents } from './styles-components.js';
 import imgAdd from './assets/outline_add_white_24dp.png';
 
+/**
+ * @typedef PlanElement
+ * @property {array} flavors plan's Array
+ * @property {array} listCart Array where add elements selectionned
+ * @property {function} listElementCart function to send listCart to fetchData
+ */
 export class PlanElement extends LitElement {
   static get properties() {
     return {
@@ -17,6 +23,14 @@ export class PlanElement extends LitElement {
     this.listCart = [];
   }
 
+  /**
+   * Copy and add params in listCart Array
+   * @param {string} variantName It's the name of Runtime selected
+   * @param {string} variantLogo It's the logo of Runtime selected
+   * @param {string} variantId It's the ID of Runtime selected + add a random number
+   * @param {string} flavorName It's the name of the plan selected
+   * @param {string} flavorPrice It's the price of the plan selected
+   */
   getListCart(variantName, variantLogo, variantId, flavorName, flavorPrice) {
     this.listCart = [
       ...this.listCart,
@@ -30,13 +44,18 @@ export class PlanElement extends LitElement {
     ];
   }
 
+  /**
+   * Generate a random number between min and max value
+   * @param {number} min Minimum value
+   * @param {number} max Maximum value
+   * @returns {number} number generate
+   */
   randomNumber = (min, max) => {
     return Math.floor(Math.random() * (max - min + 1)) + min;
   };
 
   render() {
     const { flavors } = this;
-    //console.log('plan-element', this.listCart);
 
     return html`
       <div class="columnPlan">

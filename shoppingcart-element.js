@@ -2,6 +2,14 @@ import { LitElement, html, css } from 'lit';
 import { stylesComponents } from './styles-components.js';
 import imgRemove from './assets/outline_remove_white_24dp.png';
 
+/**
+ * @typedef ShoppingCartElement
+ * @property {array} listCart Array contains elements selectionned
+ * @property {function} updateCart function to send new total to fetchData
+ * @property {number} totalCart sum total elements selectionned
+ * @property {array} newListCart Array contains elements removed
+ * @property {function} listElementCart function to send listCart to fetchData
+ */
 export class ShoppingCartElement extends LitElement {
   static get properties() {
     return {
@@ -18,6 +26,11 @@ export class ShoppingCartElement extends LitElement {
     this.totalCart = this.updateCart;
   }
 
+  /**
+   * Remove element from shopping cart
+   * @param {string} variantId Id element to remove of array
+   * @param {number} flavorPrice price to remove of total amount
+   */
   removeElementCart(variantId, flavorPrice) {
     this.newListCart = this.listCart.filter(
       elem => elem.variantId !== variantId
