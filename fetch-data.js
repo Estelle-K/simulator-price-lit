@@ -148,7 +148,7 @@ export class FetchData extends LitElement {
     css`
       .container {
         display: grid;
-        grid-template-rows: 1fr 6fr;
+        grid-template-rows: auto 1fr;
         grid-template-columns: repeat(3, 1fr);
         grid-template-areas:
           'header header header'
