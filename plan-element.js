@@ -100,21 +100,21 @@ export class PlanElement extends LitElement {
                             </td>
                             <td
                               data-label="CPUs"
-                              class="boldElement alignRightElement"
+                              class="alignRightElement"
                             >
                               ${flavor.cpus}
                             </td>
                             <td
                               data-label="GPUs"
-                              class="boldElement alignRightElement"
+                              class="alignRightElement"
                             >
                               ${flavor.gpus}
                             </td>
                             <td
                               data-label="RAM"
-                              class="boldElement alignRightElement"
+                              class="alignRightElement"
                             >
-                              ${flavor.ram}
+                              ${flavor.ram < 1024 ? flavor.ram + 'MB' : flavor.ram / 1024 + 'Go'}
                             </td>
                             <td>
                               <div class="containElement">
