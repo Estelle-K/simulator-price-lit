@@ -66,10 +66,8 @@ export class ShoppingCartElement extends LitElement {
                       Plan :
                       <span class="colorElement"> ${cart.flavorName}</span>
                       <div>
-                        Prix :
-                        <span class="boldElement">
-                          ${cart.flavorPrice.toFixed(2)} €</span
-                        >
+                        Price :
+                        <span class="boldElement">€${cart.flavorPrice.toFixed(2)}</span>
                       </div>
                     </div>
                   </div>
